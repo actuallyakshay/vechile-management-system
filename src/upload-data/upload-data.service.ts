@@ -22,7 +22,7 @@ export class UploadDataService {
    async saveExcelData(extractedData: Record<string, any>) {
       const records = Object.entries(extractedData).map(([sectionName, data]) => ({
          sectionName,
-         data: data.map((record) => {
+         data: data?.map((record) => {
             const newRecord = {};
             for (const key in record) {
                newRecord[key.toLowerCase()] = record[key];

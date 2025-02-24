@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { AddQueryDto } from './dto';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -30,8 +30,8 @@ export class GoogleSheetService {
             Quantity: data.quantity,
             Message: data.message,
             Purpose: data.purposeOfQuery,
-            Date: moment().format('YYYY-MM-DD'),
-            Time: moment().format('HH:mm A')
+            Date: moment().tz('Asia/Kolkata').format('DD-MM-YYYY'),
+            ['Time (IST)']: moment().tz('Asia/Kolkata').format('HH:mm:ss')
          });
          this.logger.log('Row added successfully');
       } catch (error) {

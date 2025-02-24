@@ -35,6 +35,7 @@
       "google-auth-library": "^9.15.1",
       "google-spreadsheet": "^4.1.4",
       "moment": "^2.30.1",
+      "moment-timezone": "^0.5.47",
       "pg": "^8.13.1",
       "reflect-metadata": "^0.1.13",
       "rxjs": "^7.8.1",
