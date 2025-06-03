@@ -8,7 +8,9 @@ export enum ErrorCodes {
    USER_NOT_FOUND = 'USER_NOT_FOUND',
    SERVICE_IS_IN_PROGRESS = 'SERVICE_IS_IN_PROGRESS',
    OWNER_CONFLICT = 'OWNER_CONFLICT',
-   SERVICE_CANNOT_BE_CANCELLED = 'SERVICE_CANNOT_BE_CANCELLED'
+   SERVICE_CANNOT_BE_CANCELLED = 'SERVICE_CANNOT_BE_CANCELLED',
+   EMAIL_ALREADY_EXISTS = 'EMAIL_ALREADY_EXISTS',
+   SERVICE_IS_ALREADY_SCHEDULED = 'SERVICE_IS_ALREADY_SCHEDULED'
 }
 
 export const ErrorDetails: Record<
@@ -57,6 +59,16 @@ export const ErrorDetails: Record<
    SERVICE_CANNOT_BE_CANCELLED: {
       code: ErrorCodes.SERVICE_CANNOT_BE_CANCELLED,
       message: 'Service cannot be cancelled at this stage',
+      statusCode: HttpStatus.BAD_REQUEST
+   },
+   EMAIL_ALREADY_EXISTS: {
+      code: ErrorCodes.EMAIL_ALREADY_EXISTS,
+      message: 'Email already exists',
+      statusCode: HttpStatus.BAD_REQUEST
+   },
+   SERVICE_IS_ALREADY_SCHEDULED: {
+      code: ErrorCodes.SERVICE_IS_ALREADY_SCHEDULED,
+      message: 'Service is already scheduled for this vehicle',
       statusCode: HttpStatus.BAD_REQUEST
    }
 };

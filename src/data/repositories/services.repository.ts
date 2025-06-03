@@ -28,9 +28,9 @@ export class ServicesRepository extends Repository<ServicesEntity> {
          .leftJoinAndSelect('service.customer', 'customer')
          .leftJoinAndSelect('service.mechanic', 'mechanic');
 
-      if (customerId) queryBuilder.where('service.customerId = :customerId', { customerId });
+      if (customerId) queryBuilder.where('customer.id = :customerId', { customerId });
 
-      if (mechanicId) queryBuilder.andWhere('service.mechanicId = :mechanicId', { mechanicId });
+      if (mechanicId) queryBuilder.andWhere('mechanic.id = :mechanicId', { mechanicId });
 
       if (status) queryBuilder.andWhere('service.status = :status', { status });
 

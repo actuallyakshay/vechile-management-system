@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { SignUpInput } from 'src/auth/dto';
+import { PaginationInputDto } from 'src/data/dto';
 import { UsersEntity } from 'src/data/entities';
 import { UsersRepository } from 'src/data/repositories';
+import { GetUsersFilters } from 'src/types';
+import { CustomHttpException, ErrorCodes, ErrorDetails, getPageValues, HandleNotFound } from 'src/utils';
 import { FindOptionsWhere } from 'typeorm';
-import { UserDetailsOutput } from './dto';
-import { ErrorCodes, HandleNotFound } from 'src/utils';
+import { CreateUserInput, UserDetailsOutput } from './dto';
 
 @Injectable()
 export class UsersService {
@@ -15,8 +16,20 @@ export class UsersService {
       return this.usersRepository.findOneOrFail({ where: input });
    }
 
-   public createUser(input: { body: SignUpInput }): Promise<UsersEntity> {
+   public async createUser(input: { body: CreateUserInput }): Promise<UsersEntity> {
       const { body } = input;
+
+      const foundUser = await this.usersRepository.findOneBy({ email: body.email });
+      if (foundUser) throw new CustomHttpException(ErrorDetails.EMAIL_ALREADY_EXISTS);
+
       return this.usersRepository.save({ ...body });
+   }
+
+   public async getAllUsers(input: { pagination: PaginationInputDto; filters?: GetUsersFilters }) {
+      const [data, total] = await this.usersRepository.getAllUsers(input);
+      return {
+         data,
+         pagination: getPageValues({ total, pagination: input.pagination })
+      };
    }
 }

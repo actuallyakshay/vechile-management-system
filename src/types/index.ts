@@ -14,3 +14,8 @@ export interface JwtUser {
 export interface ServiceFilters {
    status?: ServiceStatus;
 }
+
+export interface GetUsersFilters {
+   roles?: string[];
+   search?: string;
+}
