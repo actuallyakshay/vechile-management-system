@@ -14,11 +14,11 @@ async function bootstrap() {
    app.enableCors({ origin: '*' });
 
    const config = new DocumentBuilder()
-      .setTitle('Blog-Api-Server')
-      .setDescription('The Blog API description')
+      .setTitle('Vechile-Management-System API')
+      .setDescription('API documentation for the Vechile Management System')
       .setVersion('1.0')
       .addTag('tags')
-      .addServer(configService.get('BLOG_API_BASE_URL'), 'Blog API Server')
+      .addServer(configService.get('VMS_API_BASE_URL'), 'VMS API Base URL')
       .build();
 
    const document = SwaggerModule.createDocument(app, config, {
@@ -28,13 +28,13 @@ async function bootstrap() {
    });
 
    SwaggerModule.setup('api-docs', app, document, {
-      jsonDocumentUrl: 'api-docs/blog'
+      jsonDocumentUrl: 'api-docs/vms'
    });
 
    const port: number = configService.get<number>('PORT') || 8080;
 
    await app.listen(port);
 
-   logger.log(`Blog-Server: listening on port ${port}`);
+   logger.log(`VMS-Server: listening on port ${port}`);
 }
 bootstrap();

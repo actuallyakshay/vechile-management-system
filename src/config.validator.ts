@@ -33,14 +33,6 @@ class EnvironmentVariables {
    @IsString()
    @IsNotEmpty()
    DB_DATABASE: string;
-
-   @IsString()
-   @IsNotEmpty()
-   GOOGLE_SERVICE_ACCOUNT_EMAIL: string;
-
-   @IsString()
-   @IsNotEmpty()
-   GOOGLE_PRIVATE_KEY: string;
 }
 
 export function validateConfig(configuration: Record<string, unknown>) {
