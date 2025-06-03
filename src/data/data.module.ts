@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import * as entities from './entities';
+import * as repositories from './repositories';
 
 @Global()
 @Module({
@@ -27,6 +28,8 @@ import * as entities from './entities';
             };
          }
       })
-   ]
+   ],
+   providers: [...Object.values(repositories)],
+   exports: Object.values(repositories)
 })
 export class DataModule {}

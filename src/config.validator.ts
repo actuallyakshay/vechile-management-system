@@ -33,6 +33,18 @@ class EnvironmentVariables {
    @IsString()
    @IsNotEmpty()
    DB_DATABASE: string;
+
+   @IsString()
+   @IsNotEmpty()
+   VMS_API_BASE_URL: string;
+
+   @IsString()
+   @IsNotEmpty()
+   JWT_SECRET: string;
+
+   @IsString()
+   @IsNotEmpty()
+   JWT_EXPIRATION_TIME: string;
 }
 
 export function validateConfig(configuration: Record<string, unknown>) {
