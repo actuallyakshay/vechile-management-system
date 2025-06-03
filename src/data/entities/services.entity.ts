@@ -10,23 +10,24 @@ import {
    Relation,
    UpdateDateColumn
 } from 'typeorm';
-import { UsersEntity } from './users.entity';
-import { VechilesEntity } from './vechiles.entity';
 import { ServiceStatus } from '../enum';
+import { UsersEntity } from './users.entity';
+import { VehiclesEntity } from './vehicles.entity';
 
 @Entity('services')
 export class ServicesEntity {
    @PrimaryGeneratedColumn('uuid')
    id: string;
 
-   @Column()
+   @Column({ default: ServiceStatus.SCHEDULED })
    status: ServiceStatus;
 
    @Column({ name: 'scheduled_date' })
    scheduledDate: string;
 
+   // can be 999.80 or something like
    @Column()
-   cost: number;
+   cost: string;
 
    @Column({ name: 'duration_in_min' })
    durationInMin: number;
@@ -41,11 +42,15 @@ export class ServicesEntity {
    deletedAt: Date;
 
    //    relations
-
-   @ManyToOne(() => VechilesEntity, ({ services }) => services, { onDelete: 'CASCADE' })
+   @ManyToOne(() => VehiclesEntity, ({ services }) => services, { onDelete: 'CASCADE' })
    @JoinColumn({ name: 'vehicle_id' })
    @Index()
-   vechile: string;
+   vehicle: Relation<VehiclesEntity>;
+
+   @ManyToOne(() => UsersEntity, ({ services }) => services, { onDelete: 'CASCADE' })
+   @JoinColumn({ name: 'customer_id' })
+   @Index()
+   customer: Relation<UsersEntity>;
 
    @ManyToOne(() => UsersEntity, ({ services }) => services, { onDelete: 'CASCADE' })
    @JoinColumn({ name: 'mechanic_id' })

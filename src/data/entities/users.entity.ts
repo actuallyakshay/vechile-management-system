@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { UserRole } from '../enum';
 import { ServicesEntity } from './services.entity';
-import { VechilesEntity } from './vechiles.entity';
+import { VehiclesEntity } from './vehicles.entity';
 
 @Entity('users')
 @Unique(['email'])
@@ -41,8 +41,8 @@ export class UsersEntity {
    deletedAt: Date;
 
    // relations
-   @OneToMany(() => VechilesEntity, ({ owner }) => owner)
-   vechicles: Relation<VechilesEntity[]>;
+   @OneToMany(() => VehiclesEntity, ({ owner }) => owner)
+   vehicles: Relation<VehiclesEntity[]>;
 
    @OneToMany(() => ServicesEntity, ({ mechanic }) => mechanic)
    services: Relation<ServicesEntity[]>;
