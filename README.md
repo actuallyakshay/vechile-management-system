@@ -1,73 +1,135 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# 🚗 VEHICLE-MANAGEMENT-SYSTEM
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**_Streamline Your Fleet, Empower Your Journey_**
 
-## Description
+[![Last Commit](https://img.shields.io/github/last-commit/actuallyakshay/vehicle-management-system)](https://github.com/actuallyakshay/vehicle-management-system)  
+[![TypeScript](https://img.shields.io/badge/language-TypeScript-blue.svg)](https://www.typescriptlang.org/)  
+[![License](https://img.shields.io/github/license/actuallyakshay/vehicle-management-system)](./LICENSE)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
+## Built with the tools and technologies:
 
+![Icons](https://img.shields.io/badge/-TypeORM-red?style=flat-square&logo=typeorm)
+![Icons](https://img.shields.io/badge/-TypeScript-blue?style=flat-square&logo=typescript)
+![Icons](https://img.shields.io/badge/-Node.js-green?style=flat-square&logo=node.js)
+![Icons](https://img.shields.io/badge/-Jest-red?style=flat-square&logo=jest)
+![Icons](https://img.shields.io/badge/-Docker-blue?style=flat-square&logo=docker)
+![Icons](https://img.shields.io/badge/-Yarn-2c8ebb?style=flat-square&logo=yarn)
+![Icons](https://img.shields.io/badge/-Npm-red?style=flat-square&logo=npm)
+![Icons](https://img.shields.io/badge/-ESLint-purple?style=flat-square&logo=eslint)
+
+---
+
+## 📚 Table of Contents
+
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+
+---
+
+## 🧾 Overview
+
+The **Vehicle Management System (VMS)** is a robust developer tool designed to streamline the management of vehicle-related operations, enabling developers to build scalable and efficient applications with ease.
+
+### ❓ Why vehicle-management-system?
+
+This project empowers developers to create secure and maintainable vehicle management applications. The core features include:
+
+- 🚀 **Modular Architecture**: Facilitates maintainable and testable code, simplifying complex application management.
+- 🔐 **JWT Authentication**: Ensures secure user authentication and role-based access control for sensitive operations.
+- 🐳 **Docker Integration**: Simplifies deployment with a lightweight, production-ready containerized application.
+- ✅ **Comprehensive Testing Framework**: Includes unit and end-to-end tests to guarantee code reliability and maintainability.
+- 📘 **TypeScript Support**: Enhances code quality through strict type checking and interfaces for better development experience.
+
+---
+
+## 🏁 Getting Started
+
+### ✅ Prerequisites
+
+This project requires the following dependencies:
+
+- **Programming Language**: TypeScript  
+- **Package Manager**: Yarn, NPM  
+- **Container Runtime**: Docker
+
+---
+
+### ⚙️ Installation
+
+Build `vehicle-management-system` from the source and install dependencies:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/actuallyakshay/vehicle-management-system
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd vehicle-management-system
+   ```
+
+3. Install the dependencies:
+
+   Using **Docker**:
+   ```bash
+   docker build -t actuallyakshay/vehicle-management-system .
+   ```
+
+   Using **Yarn**:
+   ```bash
+   yarn install
+   ```
+
+   Using **npm**:
+   ```bash
+   npm install
+   ```
+
+---
+
+## 🚀 Usage
+
+Run the project with:
+
+### Using **Docker**:
 ```bash
-$ npm install
+docker run -it {image_name}
 ```
 
-## Running the app
-
+### Using **Yarn**:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+yarn start
 ```
 
-## Test
-
+### Using **NPM**:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm start
 ```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🧪 Testing
 
-## Stay in touch
+`vehicle-management-system` uses the **(test_framework)** test framework. Run the test suite with:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Using **Docker**:
+```bash
+echo "INSERT-TEST-COMMAND-HERE"
+```
 
-## License
+### Using **Yarn**:
+```bash
+yarn test
+```
 
-Nest is [MIT licensed](LICENSE).
+### Using **NPM**:
+```bash
+npm test
+```
