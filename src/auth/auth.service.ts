@@ -6,6 +6,7 @@ import { CreateStaffInput, SignInInput, SignInOutput, SignUpInput, SignUpOutput 
 import { JwtService } from '@nestjs/jwt';
 import { UserRole } from 'src/data/enum';
 import { ConfigService } from '@nestjs/config';
+import { UsersEntity } from 'src/data/entities';
 
 const SALT_ROUNDS = 10;
 
@@ -69,7 +70,7 @@ export class AuthService {
    */
 
    // only manager can create staff
-   public async createStaff(input: { body: CreateStaffInput }) {
+   public async createStaff(input: { body: CreateStaffInput }): Promise<UsersEntity> {
       const { body } = input;
       const hasedPassword = await bcrypt.hash(body.password, SALT_ROUNDS);
       return this.usersService.createUser({

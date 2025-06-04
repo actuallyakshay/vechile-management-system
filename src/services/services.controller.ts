@@ -1,12 +1,13 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard, RolesGuard } from 'src/auth/guards';
 import { UserRole } from 'src/data/enum';
 import { JwtUser } from 'src/types';
-import { GetServicesQueryDto, ScheduleServiceInput, UpdateServiceInput } from './dto';
+import { GetAllServicesOutput, GetServicesQueryDto, ScheduleServiceInput, UpdateServiceInput } from './dto';
 import { ServicesService } from './services.service';
+import { ServicesEntity } from 'src/data/entities';
 
 @ApiBearerAuth('access-token')
 @ApiTags('services-controller')
@@ -18,6 +19,7 @@ import { ServicesService } from './services.service';
 export class ServicesController {
    constructor(private readonly servicesService: ServicesService) {}
 
+   @ApiOkResponse({ type: GetAllServicesOutput })
    @Roles(UserRole.MANAGER)
    @Get('all')
    @ApiOperation({ description: 'Get all vehicle services (ONLY-MANAGER)' })
@@ -29,6 +31,7 @@ export class ServicesController {
       });
    }
 
+   @ApiOkResponse({ type: GetAllServicesOutput })
    @Roles(UserRole.MECHANIC)
    @Get('mechanic/my')
    @ApiOperation({ description: 'Get all vehicle services assigned to the mechanic (ONLY-MECHANIC)' })
@@ -41,6 +44,7 @@ export class ServicesController {
       });
    }
 
+   @ApiOkResponse({ type: GetAllServicesOutput })
    @Roles(UserRole.CUSTOMER)
    @Get('customer/my')
    @ApiOperation({ description: 'Get all vehicle services requested by the customer (ONLY-CUSTOMER)' })
@@ -53,18 +57,21 @@ export class ServicesController {
       });
    }
 
+   @ApiOkResponse({ type: ServicesEntity })
    @Roles(UserRole.CUSTOMER)
    @Post('schedule')
    scheduleService(@Body() body: ScheduleServiceInput, @CurrentUser() user: JwtUser) {
       return this.servicesService.scheduleService({ body, user });
    }
 
+   @ApiOkResponse({ type: ServicesEntity })
    @Roles(UserRole.CUSTOMER)
    @Patch('cancel/:serviceId')
    cancelServiceRequest(@CurrentUser() user: JwtUser, @Param('serviceId') serviceId: string) {
       return this.servicesService.cancelServiceRequest({ user, serviceId });
    }
 
+   @ApiOkResponse({ type: ServicesEntity })
    @Roles(UserRole.MECHANIC)
    @Patch('update-status/:serviceId')
    updateServiceStatus(@Param('serviceId') serviceId: string, @CurrentUser() user: JwtUser, @Body() body: UpdateServiceInput) {

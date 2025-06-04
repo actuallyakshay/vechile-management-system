@@ -5,8 +5,9 @@ import { JwtUser } from 'src/types';
 import { JwtAuthGuard, RolesGuard } from 'src/auth/guards';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UserRole } from 'src/data/enum';
-import { GetUsersQueryDto } from './dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { GetAllUsersOutput, GetUsersQueryDto } from './dto';
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { UsersEntity } from 'src/data/entities';
 
 @ApiBearerAuth('access-token')
 @ApiTags('users-controller')
@@ -18,11 +19,13 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class UsersController {
    constructor(private readonly usersService: UsersService) {}
 
+   @ApiOkResponse({ type: UsersEntity })
    @Get('me')
    public getUserInfo(@CurrentUser() user: JwtUser) {
       return this.usersService.findUser({ id: user.id });
    }
 
+   @ApiOkResponse({ type: GetAllUsersOutput })
    @UseGuards(RolesGuard)
    @Roles(UserRole.MANAGER)
    @Get('all')

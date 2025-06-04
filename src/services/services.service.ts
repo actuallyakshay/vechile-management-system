@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtUser, ServiceFilters } from 'src/types';
-import { ScheduleServiceInput, UpdateServiceInput } from './dto';
+import { GetAllServicesOutput, ScheduleServiceInput, UpdateServiceInput } from './dto';
 import { ServicesRepository } from 'src/data/repositories';
 import { ServiceStatus } from 'src/data/enum';
 import { ServicesEntity } from 'src/data/entities';
@@ -20,7 +20,12 @@ export class ServicesService {
       return this.serviceRepository.findOneOrFail({ where: input });
    }
 
-   async getVehicleServices(input: { customerId?: string; pagination: PaginationInputDto; filters: ServiceFilters; mechanicId?: string }) {
+   async getVehicleServices(input: {
+      customerId?: string;
+      pagination: PaginationInputDto;
+      filters: ServiceFilters;
+      mechanicId?: string;
+   }): Promise<GetAllServicesOutput> {
       const [data, total] = await this.serviceRepository.getServices(input);
 
       return {
@@ -29,7 +34,7 @@ export class ServicesService {
       };
    }
 
-   async scheduleService(input: { body: ScheduleServiceInput; user: JwtUser }) {
+   async scheduleService(input: { body: ScheduleServiceInput; user: JwtUser }): Promise<ServicesEntity> {
       const {
          body: { vehicleId, mechanicId, ...rest },
          user: { id: userId }
@@ -63,7 +68,7 @@ export class ServicesService {
       });
    }
 
-   async cancelServiceRequest(input: { serviceId: string; user: JwtUser }) {
+   async cancelServiceRequest(input: { serviceId: string; user: JwtUser }): Promise<ServicesEntity> {
       const { serviceId, user } = input;
       // we can ony cancel a service if it is in progress
       const foundSevice = await this.findService({
@@ -81,7 +86,7 @@ export class ServicesService {
       });
    }
 
-   async updateServiceStatus(input: { serviceId: string; mechanicId: string; body: UpdateServiceInput }) {
+   async updateServiceStatus(input: { serviceId: string; mechanicId: string; body: UpdateServiceInput }): Promise<ServicesEntity> {
       const { serviceId, mechanicId, body } = input;
 
       const foundService = await this.findService({

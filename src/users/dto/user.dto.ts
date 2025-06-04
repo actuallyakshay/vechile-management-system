@@ -1,5 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { PaginationOutputDto } from 'src/data/dto';
+import { UsersEntity } from 'src/data/entities';
 import { UserRole } from 'src/data/enum';
 
 export class UserDetailsOutput {
@@ -49,4 +51,9 @@ export class CreateUserInput {
    @IsString()
    @IsOptional()
    role?: UserRole;
+}
+
+export class GetAllUsersOutput extends PaginationOutputDto {
+   @ApiProperty({ type: [UsersEntity] })
+   data: UsersEntity[];
 }

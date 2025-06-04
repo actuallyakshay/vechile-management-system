@@ -1,5 +1,7 @@
 import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { PaginationOutputDto } from 'src/data/dto';
+import { VehiclesEntity } from 'src/data/entities';
 
 export class CreateVehicleInput {
    @ApiProperty()
@@ -24,3 +26,8 @@ export class CreateVehicleInput {
 }
 
 export class UpdateVehicleInput extends PartialType(OmitType(CreateVehicleInput, ['VIN'])) {}
+
+export class GetAllVehiclesOutput extends PaginationOutputDto {
+   @ApiProperty({ type: [VehiclesEntity] })
+   data: VehiclesEntity[];
+}

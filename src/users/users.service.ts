@@ -5,14 +5,14 @@ import { UsersRepository } from 'src/data/repositories';
 import { GetUsersFilters } from 'src/types';
 import { CustomHttpException, ErrorCodes, ErrorDetails, getPageValues, HandleNotFound } from 'src/utils';
 import { FindOptionsWhere } from 'typeorm';
-import { CreateUserInput, UserDetailsOutput } from './dto';
+import { CreateUserInput, GetAllUsersOutput } from './dto';
 
 @Injectable()
 export class UsersService {
    constructor(private readonly usersRepository: UsersRepository) {}
 
    @HandleNotFound(ErrorCodes.USER_NOT_FOUND)
-   public findUser(input: FindOptionsWhere<UsersEntity>): Promise<UserDetailsOutput | null> {
+   public findUser(input: FindOptionsWhere<UsersEntity>): Promise<UsersEntity | null> {
       return this.usersRepository.findOneOrFail({ where: input });
    }
 
@@ -25,7 +25,7 @@ export class UsersService {
       return this.usersRepository.save({ ...body });
    }
 
-   public async getAllUsers(input: { pagination: PaginationInputDto; filters?: GetUsersFilters }) {
+   public async getAllUsers(input: { pagination: PaginationInputDto; filters?: GetUsersFilters }): Promise<GetAllUsersOutput> {
       const [data, total] = await this.usersRepository.getAllUsers(input);
       return {
          data,

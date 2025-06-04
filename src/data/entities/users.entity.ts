@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
    Column,
    CreateDateColumn,
@@ -16,27 +17,35 @@ import { VehiclesEntity } from './vehicles.entity';
 @Entity('users')
 @Unique(['email'])
 export class UsersEntity {
+   @ApiProperty()
    @PrimaryGeneratedColumn('uuid')
    id: string;
 
+   @ApiProperty()
    @Column()
    name: string;
 
+   @ApiProperty()
    @Column()
    email: string;
 
+   @ApiProperty()
    @Column()
    password: string;
 
+   @ApiProperty()
    @Column({ default: UserRole.CUSTOMER })
    role: UserRole;
 
+   @ApiProperty()
    @CreateDateColumn({ name: 'created_at' })
    createdAt: Date;
 
+   @ApiPropertyOptional()
    @UpdateDateColumn({ name: 'updated_at', nullable: true })
    updatedAt: Date;
 
+   @ApiPropertyOptional()
    @DeleteDateColumn({ name: 'deleted_at', nullable: true })
    deletedAt: Date;
 

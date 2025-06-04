@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
+import { PaginationOutputDto } from 'src/data/dto';
+import { ServicesEntity } from 'src/data/entities';
 import { ServiceStatus } from 'src/data/enum';
 
 export class ScheduleServiceInput {
@@ -45,4 +47,9 @@ export class UpdateServiceInput {
    @IsNotEmpty()
    @IsString()
    status: ServiceStatus;
+}
+
+export class GetAllServicesOutput extends PaginationOutputDto {
+   @ApiProperty({ type: [ServicesEntity] })
+   data: ServicesEntity[];
 }
